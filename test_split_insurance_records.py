@@ -22,11 +22,13 @@ class SplitInsuranceRecordsTest(unittest.TestCase):
                      ["barney", "Barney Charlie", 1, "insurance_2"],
                      ["wilma", "Wilma Alfa", 1, "insurance_3"],
                      ["scoob", "Scooby Doo", 1, "insurance_2"],
-                     ["wilma", "Wilma Alfa", 2, "insurance_3"]]
+                     ["wilma", "Wilma Alfa", 3, "insurance_3"],
+                     ["wilma", "Wilma Alfa", 2, "insurance_3"],
+                     ["srogers", "Shaggy Rogers", 1, "insurance_1"], ]
 
-        expected_seperated_files = {"insurance_1": [["fstone", "Fred Bravo", 1, "insurance_1"]],
+        expected_seperated_files = {"insurance_1": [["fstone", "Fred Bravo", 1, "insurance_1"], ["srogers", "Shaggy Rogers", 1, "insurance_1"]],
                                     "insurance_2": [["barney", "Barney Charlie", 1, "insurance_2"], ["scoob", "Scooby Doo", 1, "insurance_2"]],
-                                    "insurance_3": [["wilma", "Wilma Alfa", 2, "insurance_3"]]}
+                                    "insurance_3": [["wilma", "Wilma Alfa", 3, "insurance_3"]]}
 
         seperated_files = split_insurance_records.process_csv(test_rows)
         self.assertEqual(expected_seperated_files, seperated_files)

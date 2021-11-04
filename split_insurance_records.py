@@ -19,7 +19,7 @@ def process_csv(csv_reader):
 
     for row in csv_reader:
         # insurance company should be the last value in the row
-        # might be safer to index it directly
+        # safer to index it directly..?
         insurance_company = row[-1]
 
         if(insurance_company in seperated_files):
@@ -64,20 +64,20 @@ def main():
     with open(args.file, 'r') as csv_file_in:
         csv_reader = csv.reader(csv_file_in, delimiter=',')
 
-        # set the header as first row and move the iterator
+        # first row should be the header
+        # store it for later and iterate over
         header = next(csv_reader, None)
 
         # split the csv into seperate lists based on the insurance company
         seperated_files = process_csv(csv_reader)
 
     for file, rows in seperated_files.items():
-        # sort the rows by the last value (presumably last name) in the First name and Last name column before writing
         sorted_rows = sort_csv_by_last_name(rows)
 
         filename = file + ".csv"
 
         print("Creating file: " + filename)
-        # write the csv
+
         write_csv(filename, header, sorted_rows)
 
     print("Done.")
